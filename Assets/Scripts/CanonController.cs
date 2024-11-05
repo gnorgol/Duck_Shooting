@@ -5,6 +5,9 @@ public class CanonController : MonoBehaviour
     public GameObject bulletPrefab;
     public float moveSpeed = 5f;
     public Transform firePoint;
+    public float fireCooldown = 0.5f; // Cooldown en secondes
+
+    private float lastFireTime;
 
     void Update()
     {
@@ -17,9 +20,10 @@ public class CanonController : MonoBehaviour
         transform.position = new Vector3(clampedX, transform.position.y, 0);
 
         // Tirer un projectile verticalement avec la touche espace
-        if (Input.GetKeyDown(KeyCode.Space))
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && Time.time >= lastFireTime + fireCooldown)
         {
             Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+            lastFireTime = Time.time;
         }
     }
 }

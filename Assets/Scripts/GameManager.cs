@@ -61,6 +61,5 @@ public class GameManager : MonoBehaviour
         timerText.text = "Time: 0";
         // Affiche le score final
         Debug.Log("Game Over! Final Score: " + score);
-        // Vous pouvez ajouter ici une UI de fin de jeu pour montrer le score final
     }
 }
