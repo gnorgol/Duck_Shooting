@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,11 +13,13 @@ public class GameManager : MonoBehaviour
     public TMP_Text bestScoreText;
     public TMP_Text GameOverText;
     public GameObject gameOverPanel;
+    public Button StartGameButton;
+
 
 
     private int score = 0;
     private int bestScore = 0;
-    private bool isGameActive = true;
+    public bool isGameActive = false;
 
     void Start()
     {
@@ -25,6 +28,7 @@ public class GameManager : MonoBehaviour
         bestScore = PlayerPrefs.GetInt("BestScore", 0);
         UpdateScoreText();
         UpdateBestScoreText();
+        StartGameButton.onClick.AddListener(StartGame);
     }
 
     void Awake()
@@ -48,7 +52,11 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
+    private void StartGame()
+    {
+        isGameActive = true;
+        StartGameButton.gameObject.SetActive(false);
+    }
     public void AddScore(int points)
     {
         score += points;
